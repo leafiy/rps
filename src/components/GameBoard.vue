@@ -62,8 +62,8 @@ export default {
         initItems() {
             this.items = []; // 清空之前的游戏元素
 
-            // 生成 20 个剪刀、石头、布
-            for (let i = 0; i < 20; i++) {
+            // 生成 10 个剪刀、石头、布
+            for (let i = 0; i < 40; i++) {
                 this.items.push(this.createItem('scissors'));
                 this.items.push(this.createItem('rock'));
                 this.items.push(this.createItem('paper'));
@@ -119,7 +119,7 @@ export default {
             }
             if (image) {
                 // 假设图标大小为 40x40
-                this.ctx.drawImage(image, item.x - 20, item.y - 20, 20, 20);
+                this.ctx.drawImage(image, item.x - 10, item.y - 10, 10, 10);
 
             }
         },
@@ -132,7 +132,7 @@ export default {
             }
         },
         checkCollisions() {
-            const size = 20; // 假设每个元素的大小相同
+            const size = 10; // 假设每个元素的大小相同
             for (let i = 0; i < this.items.length; i++) {
                 for (let j = i + 1; j < this.items.length; j++) {
                     const item1 = this.items[i];
