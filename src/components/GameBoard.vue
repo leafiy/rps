@@ -8,6 +8,9 @@
             <p>布: {{ paperCount }}</p>
         </div>
         <button @click="startGame">Start</button>
+        <div v-if="showModal" class="modal">
+            <p>{{ modalMessage }}</p>
+        </div>
     </div>
 </template>
 
@@ -27,6 +30,8 @@ export default {
             gameEnded: false,
             canvasWidth: 600, // 初始宽度
             canvasHeight: 400, // 初始高度
+            showModal: false,
+            modalMessage: '',
 
         };
     },
@@ -42,16 +47,28 @@ export default {
         },
     },
     methods: {
+        restartGame() {
+            this.showModal = false; // 隐藏模态框
+            this.startGame(); // 重新开始游戏
+        },
+        endGame(message) {
+            this.modalMessage = message;
+            this.showModal = true; // 显示模态框
+            setTimeout(() => {
+                this.restartGame();
+            }, 20000); // 20秒后自动重新开始游戏
+        },
         loadImages() {
             this.scissorsImage = new Image();
-            this.scissorsImage.src = require('@/assets/scissors.svg');
+            this.scissorsImage.src = require('@/assets/scissors.png');
 
             this.rockImage = new Image();
-            this.rockImage.src = require('@/assets/rock.svg');
+            this.rockImage.src = require('@/assets/rock.png');
 
             this.paperImage = new Image();
-            this.paperImage.src = require('@/assets/paper.svg');
+            this.paperImage.src = require('@/assets/paper.png');
         },
+
         startGame() {
             this.gameEnded = false; // 重置游戏结束标记
             this.initItems(); // 初始化游戏元素
@@ -230,7 +247,8 @@ export default {
             if (isGameOver) {
                 this.gameEnded = true; // 标记游戏已结束
                 clearInterval(this.intervalId); // 停止游戏循环
-                alert(`游戏结束，胜利者：${firstType}`); // 弹出胜利者信息
+                this.endGame(`游戏结束，胜利者：${firstType}`);
+
                 // 可以在这里添加其他游戏结束后的逻辑
             }
         },
@@ -274,5 +292,16 @@ export default {
     border: 2px solid #000;
     /* 黑色边框，你可以自定义颜色和边框宽度 */
     /* 可以添加其他样式，如圆角等 */
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    background-color: white;
+    padding: 20px;
+    z-index: 1000;
 }
 </style>
