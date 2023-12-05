@@ -29,7 +29,7 @@ export default {
             gameDuration: 0,
             gameEnded: false,
             canvasWidth: 600, // 初始宽度
-            canvasHeight: 400, // 初始高度
+            canvasHeight: 800, // 初始高度
             showModal: false,
             modalMessage: '',
 
@@ -56,7 +56,7 @@ export default {
             this.showModal = true; // 显示模态框
             setTimeout(() => {
                 this.restartGame();
-            }, 20000); // 20秒后自动重新开始游戏
+            }, 6000); // 20秒后自动重新开始游戏
         },
         loadImages() {
             this.scissorsImage = new Image();
@@ -172,7 +172,7 @@ export default {
             }
             if (image) {
                 // 假设图标大小为 40x40
-                this.ctx.drawImage(image, item.x - 10, item.y - 10, 10, 10);
+                this.ctx.drawImage(image, item.x - 20, item.y - 20, 20, 20);
 
             }
         },
@@ -288,6 +288,7 @@ export default {
     max-width: 800px;
     /* 设置最大宽度为 800px */
     width: 100%;
+    height: 600px;
     /* 允许画布在较小的屏幕上自适应宽度 */
     border: 2px solid #000;
     /* 黑色边框，你可以自定义颜色和边框宽度 */
