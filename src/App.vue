@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <game-board></game-board>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import GameBoard from './components/GameBoard.vue'
-
 export default {
   name: 'App',
-  components: {
-    GameBoard
-  }
 }
 </script>
 
